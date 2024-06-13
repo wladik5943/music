@@ -1,7 +1,7 @@
 package by.tms.music.service.genre.impl;
 
-import by.tms.music.genre.GenreCreateRequest;
-import by.tms.music.genre.GenreResponse;
+import by.tms.music.genre.model.GenreCreateRequest;
+import by.tms.music.genre.model.GenreResponse;
 import by.tms.music.mapper.GenreMapper;
 import by.tms.music.repository.GenreRepository;
 import by.tms.music.service.genre.GenreService;

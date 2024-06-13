@@ -1,9 +1,8 @@
 package by.tms.music.mapper;
 
-import by.tms.music.entity.Album;
 import by.tms.music.entity.Song;
-import by.tms.music.song.SongCreateRequest;
-import by.tms.music.song.SongResponse;
+import by.tms.music.song.model.SongCreateRequest;
+import by.tms.music.song.model.SongResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -14,6 +13,7 @@ public interface SongMapper {
     @Mapping(target = "artist.albums", ignore = true)
     @Mapping(target = "album.artist", ignore = true)
     @Mapping(target = "album.genre", ignore = true)
+    @Mapping(target = "album.songs", ignore = true)
     @Mapping(target = "genre.albums", ignore = true)
     @Mapping(target = "genre.songs", ignore = true)
     SongResponse toResponse(Song song);

@@ -7,14 +7,15 @@ import by.tms.music.repository.ArtistRepository;
 import by.tms.music.repository.GenreRepository;
 import by.tms.music.repository.SongRepository;
 import by.tms.music.service.song.SongService;
-import by.tms.music.song.SongCreateRequest;
-import by.tms.music.song.SongResponse;
+import by.tms.music.song.model.SongCreateRequest;
+import by.tms.music.song.model.SongResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -37,13 +38,17 @@ public class SongServiceImpl implements SongService {
 
 
     @Override
-    public Collection<SongResponse> getSongsByArtistId(Long artistId) {
-        Specification<Song> spec = Specification.where(((root, query, criteriaBuilder)
-                -> criteriaBuilder.equal(root.get("artistId"), artistId)));
-        return songRepository.findAll(spec).stream().map(songMapper::toResponse).toList();
+    public Page<SongResponse> getSongsByArtistId(Long artistId, Pageable pageable) {
+        return songRepository.findByArtistId(pageable, artistId).map(songMapper::toResponse);
     }
     @Override
     public SongResponse getSongById(Long id){
         return songMapper.toResponse(songRepository.findById(id).orElse(null));
+    }
+
+    public Collection<SongResponse> getSongsByAlbumId(Long albumId){
+        Specification<Song> spec = Specification.where(((root, query, criteriaBuilder)
+                -> criteriaBuilder.equal(root.get("albumId"), albumId)));
+        return songRepository.findAll(spec).stream().map(songMapper::toResponse).toList();
     }
 }

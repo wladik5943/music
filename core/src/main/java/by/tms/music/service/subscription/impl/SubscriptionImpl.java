@@ -1,16 +1,13 @@
 package by.tms.music.service.subscription.impl;
 
-import by.tms.music.entity.Subscription;
-import by.tms.music.entity.User;
 import by.tms.music.mapper.SubcriptionMapper;
 import by.tms.music.mapper.UserMapper;
 import by.tms.music.repository.RateRepository;
 import by.tms.music.repository.SubscriptionRepository;
 import by.tms.music.repository.UserRepository;
 import by.tms.music.service.subscription.SubscriptionService;
-import by.tms.music.subscription.SubscriptionCreateRequest;
-import by.tms.music.subscription.SubscriptionResponse;
-import by.tms.music.user.UserUpdateRequest;
+import by.tms.music.subscription.model.SubscriptionCreateRequest;
+import by.tms.music.subscription.model.SubscriptionResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 @RequiredArgsConstructor

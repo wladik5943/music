@@ -3,10 +3,10 @@ package by.tms.music.mapper;
 import by.tms.music.entity.Rate;
 import by.tms.music.entity.Subscription;
 import by.tms.music.entity.User;
-import by.tms.music.rate.RateResponse;
-import by.tms.music.subscription.SubscriptionCreateRequest;
-import by.tms.music.subscription.SubscriptionResponse;
-import by.tms.music.user.UserResponse;
+import by.tms.music.rate.model.RateResponse;
+import by.tms.music.subscription.model.SubscriptionCreateRequest;
+import by.tms.music.subscription.model.SubscriptionResponse;
+import by.tms.music.user.model.UserResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

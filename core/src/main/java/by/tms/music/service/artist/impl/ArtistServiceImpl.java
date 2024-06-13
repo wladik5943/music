@@ -1,7 +1,7 @@
 package by.tms.music.service.artist.impl;
 
-import by.tms.music.artist.ArtistCreateRequest;
-import by.tms.music.artist.ArtistResponse;
+import by.tms.music.artist.model.ArtistCreateRequest;
+import by.tms.music.artist.model.ArtistResponse;
 import by.tms.music.mapper.ArtistMapper;
 import by.tms.music.repository.ArtistRepository;
 import by.tms.music.service.artist.ArtistService;

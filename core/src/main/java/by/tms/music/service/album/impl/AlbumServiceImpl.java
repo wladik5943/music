@@ -1,7 +1,7 @@
 package by.tms.music.service.album.impl;
 
-import by.tms.music.album.AlbumCreateRequest;
-import by.tms.music.album.AlbumResponse;
+import by.tms.music.album.model.AlbumCreateRequest;
+import by.tms.music.album.model.AlbumResponse;
 import by.tms.music.mapper.AlbumMapper;
 import by.tms.music.repository.AlbumRepository;
 import by.tms.music.repository.ArtistRepository;

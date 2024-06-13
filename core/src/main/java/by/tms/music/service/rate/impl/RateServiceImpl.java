@@ -1,8 +1,8 @@
 package by.tms.music.service.rate.impl;
 
 import by.tms.music.mapper.RateMapper;
-import by.tms.music.rate.RateCreateRequest;
-import by.tms.music.rate.RateResponse;
+import by.tms.music.rate.model.RateCreateRequest;
+import by.tms.music.rate.model.RateResponse;
 import by.tms.music.repository.RateRepository;
 import by.tms.music.service.rate.RateService;
 import lombok.RequiredArgsConstructor;

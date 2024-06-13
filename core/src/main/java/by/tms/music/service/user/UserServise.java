@@ -1,8 +1,8 @@
 package by.tms.music.service.user;
 
-import by.tms.music.song.SongResponse;
-import by.tms.music.user.UserCreateRequest;
-import by.tms.music.user.UserResponse;
+import by.tms.music.song.model.SongResponse;
+import by.tms.music.user.model.UserCreateRequest;
+import by.tms.music.user.model.UserResponse;
 
 import java.util.Collection;
 

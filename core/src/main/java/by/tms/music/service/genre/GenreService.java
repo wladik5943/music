@@ -1,8 +1,7 @@
 package by.tms.music.service.genre;
 
-import by.tms.music.genre.GenreCreateRequest;
-import by.tms.music.genre.GenreResponse;
-import by.tms.music.genre.GenreUpdateRequest;
+import by.tms.music.genre.model.GenreCreateRequest;
+import by.tms.music.genre.model.GenreResponse;
 
 public interface GenreService {
     public GenreResponse addGenre(GenreCreateRequest request);
