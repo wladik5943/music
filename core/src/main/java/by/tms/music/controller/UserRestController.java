@@ -18,10 +18,10 @@ public class UserRestController implements UserRestAPI {
 
     private final UserServise userServise;
 
-    @Override
-    public UserResponse register(@RequestBody UserCreateRequest createRequest) {
-        return userServise.register(createRequest);
-    }
+//    @Override
+//    public UserResponse register(@RequestBody UserCreateRequest createRequest) {
+//        return userServise.register(createRequest);
+//    }
     @Override
     public SongResponse addFavorite(@RequestParam Long userId, @RequestParam Long songId) {
         return userServise.addFavoriteSong(songId, userId);

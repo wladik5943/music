@@ -2,6 +2,7 @@ package by.tms.music.security.service.impl;
 
 import by.tms.music.repository.UserRepository;
 import by.tms.music.security.service.SignService;
+import by.tms.music.service.user.impl.UserServiceImpl;
 import by.tms.music.token.JwtAuthenticationResponse;
 import by.tms.music.user.model.UserCreateRequest;
 import jakarta.transaction.Transactional;
@@ -18,12 +19,18 @@ import org.springframework.stereotype.Service;
 public class SignServiceImpl implements SignService {
 
     private final UserRepository userRepository;
-
+    private final UserServiceImpl userService;
     private final AuthenticationManager authenticationManager;
     private final JwtServiceImpl jwtService;
 
+    public JwtAuthenticationResponse signUp(UserCreateRequest userCreateRequest) {
+        var user = userService.register(userCreateRequest);
+        return new JwtAuthenticationResponse(jwtService.generateToken(user));
+    }
+
+
     @Override
-    public JwtAuthenticationResponse SignUp(UserCreateRequest userCreateRequest) {
+    public JwtAuthenticationResponse SignIn(UserCreateRequest userCreateRequest) {
         var user = userRepository.findByLogin(userCreateRequest.getLogin());
         var authToken =new UsernamePasswordAuthenticationToken(
                 userCreateRequest.getLogin(),

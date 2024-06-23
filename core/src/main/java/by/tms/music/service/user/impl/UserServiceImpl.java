@@ -12,6 +12,8 @@ import by.tms.music.song.model.SongResponse;
 import by.tms.music.user.model.UserCreateRequest;
 import by.tms.music.user.model.UserResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,9 +31,9 @@ public class UserServiceImpl implements UserServise {
     private final SongMapper songMapper;
 
     @Override
-    public UserResponse register(UserCreateRequest createRequest) {
+    public User register(UserCreateRequest createRequest) {
         var user = userMapper.toEntity(createRequest);
-        return userMapper.toResponse(userRepository.save(user));
+        return userRepository.save(user);
     }
 
     @Override
@@ -86,5 +88,9 @@ public class UserServiceImpl implements UserServise {
     }
 //    сделать exeption и метод должен ее выбрасывать
 
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return userRepository.findByLogin(username);
+    }
 
 }

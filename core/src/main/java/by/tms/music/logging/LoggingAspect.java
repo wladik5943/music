@@ -1,5 +1,6 @@
 package by.tms.music.logging;
 
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -15,25 +16,25 @@ import java.time.LocalTime;
 
 @Aspect
 @Component
+@Slf4j
 public class LoggingAspect {
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+//    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Before("execution(* by.tms.music.controller.*.*(..))")
     public void logBefore(JoinPoint joinPoint) {
-        logger.info("Executing method: {}",  joinPoint.getSignature().toShortString());
+        log.info("Executing method: {}",  joinPoint.getSignature().toShortString());
     }
 
     @AfterReturning(pointcut = "execution(* by.tms.music.controller.*.*(..))", returning = "result")
     public void logAfter(JoinPoint joinPoint, Object result) {
-        logger.info("Executing method: {}",  joinPoint.getSignature().toShortString());
-        logger.info("Method return: {}", result);
+        log.info("Executing method: {}",  joinPoint.getSignature().toShortString());
+        log.info("Method return: {}", result);
     }
-
 //    @Around("execution(* by.tms.music.controller.*.*(..))")
 //    public void logAround(ProceedingJoinPoint joinPoint) throws Throwable {
-//        logger.info( LocalTime.now() + "  start method: {}",  joinPoint.getSignature().toShortString());
+//        log.info( LocalTime.now() + "  start method: {}",  joinPoint.getSignature().toShortString());
 //        joinPoint.proceed();
-//        logger.info(LocalTime.now() + " end method: {}",  joinPoint.getSignature().toShortString());
+//        log.info(LocalTime.now() + " end method: {}",  joinPoint.getSignature().toShortString());
 //    }
 
 }

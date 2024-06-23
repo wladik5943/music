@@ -1,12 +1,10 @@
 package by.tms.music.security;
+import by.tms.music.security.service.SignService;
 import by.tms.music.security.service.impl.SignServiceImpl;
 import by.tms.music.token.JwtAuthenticationResponse;
 import by.tms.music.user.model.UserCreateRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -16,8 +14,14 @@ public class JwtController {
 private final SignServiceImpl signService;
 
 
-@PostMapping("/sign-in")
-public JwtAuthenticationResponse signIn(@RequestBody UserCreateRequest userCreateRequest) {
-return null;
-}
+    @RequestMapping(value ="/sign-in", method = RequestMethod.POST)
+    public JwtAuthenticationResponse signIn(@RequestBody UserCreateRequest userCreateRequest) {
+        return signService.SignIn(userCreateRequest);
+    }
+
+
+    @RequestMapping(value ="/sign-up", method = RequestMethod.POST)
+    public JwtAuthenticationResponse signUp(@RequestBody UserCreateRequest userCreateRequest){
+        return signService.signUp(userCreateRequest);
+    }
 }

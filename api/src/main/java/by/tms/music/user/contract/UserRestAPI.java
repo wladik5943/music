@@ -11,9 +11,9 @@ import java.util.Collection;
 @RequestMapping("user")
 public interface UserRestAPI {
 
-    @Transactional
-    @PostMapping
-    public UserResponse register(@RequestBody UserCreateRequest createRequest);
+//    @Transactional
+//    @PostMapping
+//    public UserResponse register(@RequestBody UserCreateRequest createRequest);
 
     @Transactional
     @PostMapping("/favorite")

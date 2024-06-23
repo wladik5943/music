@@ -4,5 +4,7 @@ import by.tms.music.token.JwtAuthenticationResponse;
 import by.tms.music.user.model.UserCreateRequest;
 
 public interface SignService {
-    public JwtAuthenticationResponse SignUp(UserCreateRequest userCreateRequest);
+    public JwtAuthenticationResponse SignIn(UserCreateRequest userCreateRequest);
+    public JwtAuthenticationResponse signUp(UserCreateRequest userCreateRequest);
+
 }
