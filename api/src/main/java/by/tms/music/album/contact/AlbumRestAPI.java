@@ -15,4 +15,7 @@ public interface AlbumRestAPI {
 
     @GetMapping("/get/{id}")
     public AlbumResponse getAlbum(@PathVariable Long id);
+
+    @DeleteMapping("delete/{id}")
+    public void deleteAlbum(@PathVariable Long id);
 }

@@ -28,4 +28,9 @@ public class AlbumRestController implements AlbumRestAPI {
         }
         return album;
     }
+
+    @Override
+    public void deleteAlbum(Long id) {
+        albumService.deleteAlbum(id);
+    }
 }

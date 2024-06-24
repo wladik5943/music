@@ -30,4 +30,9 @@ public class AlbumServiceImpl implements AlbumService {
     public AlbumResponse getAlbum(Long id) {
         return albumMapper.toResponse(albumRepository.findById(id).orElse(null));
     }
+
+    @Override
+    public void deleteAlbum(Long id) {
+        albumRepository.deleteById(id);
+    }
 }

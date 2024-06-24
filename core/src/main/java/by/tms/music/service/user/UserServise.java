@@ -12,10 +12,11 @@ import java.util.Collection;
 public interface UserServise {
     public User register(UserCreateRequest user);
     public Collection<UserResponse> getUsers();
-    public SongResponse addFavoriteSong(Long songId, Long userId);
-    public Collection<SongResponse> getFavoriteSongs(Long userId);
-    public void deleteFavoriteSong(Long songId, Long userId);
+    public SongResponse addFavoriteSong(Long songId);
+    public Collection<SongResponse> getFavoriteSongs();
+    public void deleteFavoriteSong(Long songId);
     public UserResponse authorization(String login, String password);
     public UserResponse getUserById(Long userId);
     public UserDetails loadUserByUsername(String username);
+    public UserResponse editPassword(String password);
 }

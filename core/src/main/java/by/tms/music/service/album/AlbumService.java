@@ -6,4 +6,5 @@ import by.tms.music.album.model.AlbumResponse;
 public interface AlbumService {
  public AlbumResponse addAlbum(AlbumCreateRequest request);
  public AlbumResponse getAlbum(Long id);
+ public void deleteAlbum(Long id);
 }

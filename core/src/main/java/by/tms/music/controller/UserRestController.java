@@ -22,25 +22,19 @@ public class UserRestController implements UserRestAPI {
 //    public UserResponse register(@RequestBody UserCreateRequest createRequest) {
 //        return userServise.register(createRequest);
 //    }
-    @Override
-    public SongResponse addFavorite(@RequestParam Long userId, @RequestParam Long songId) {
-        return userServise.addFavoriteSong(songId, userId);
-    }
-    @Override
-    public UserResponse auth(@RequestParam String login, @RequestParam String password) {
-        return userServise.authorization(login, password);
-    }
 
+
+    @Override
+    public UserResponse editPassword(@RequestParam String password) {
+        return userServise.editPassword(password);
+    }
 
     @Override
     public Collection<UserResponse> getUsers() {
         return userServise.getUsers();
     }
 
-    @Override
-    public Collection<SongResponse> getFavoriteSongs(@RequestParam Long userId) {
-        return userServise.getFavoriteSongs(userId);
-    }
+
     @Override
     public UserResponse getUser(@PathVariable Long id) {
         var user = userServise.getUserById(id);
@@ -51,10 +45,7 @@ public class UserRestController implements UserRestAPI {
     }
 
 
-    @Override
-    public void removeFavorite(@RequestParam Long userId, @RequestParam Long songId) {
-        userServise.deleteFavoriteSong(songId, userId);
-    }
+
 
 
 }

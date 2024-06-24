@@ -15,22 +15,17 @@ public interface UserRestAPI {
 //    @PostMapping
 //    public UserResponse register(@RequestBody UserCreateRequest createRequest);
 
-    @Transactional
-    @PostMapping("/favorite")
-    public SongResponse addFavorite(@RequestParam Long userId, @RequestParam Long songId);
 
-    @PostMapping("/auth")
-    public UserResponse auth(@RequestParam String login, @RequestParam String password);
+    @PostMapping("/editPassword")
+    @Transactional
+    public UserResponse editPassword(@RequestParam String password);
 
     @GetMapping
     public Collection<UserResponse> getUsers();
 
-    @GetMapping("/favorite")
-    public Collection<SongResponse> getFavoriteSongs(@RequestParam Long userId);
 
     @GetMapping("/user/{id}")
     public UserResponse getUser(@PathVariable Long id);
 
-    @DeleteMapping("/favorite")
-    public void removeFavorite(@RequestParam Long userId, @RequestParam Long songId);
+
 }

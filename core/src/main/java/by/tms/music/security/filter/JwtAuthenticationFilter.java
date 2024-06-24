@@ -1,5 +1,6 @@
 package by.tms.music.security.filter;
 
+import by.tms.music.entity.User;
 import by.tms.music.security.service.JwtService;
 import by.tms.music.service.user.impl.UserServiceImpl;
 import jakarta.servlet.FilterChain;
@@ -29,8 +30,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        var authHeader = request.getHeader("HEADER_NAME");
-        if(StringUtils.isEmpty(authHeader) || !StringUtils.startsWith(authHeader, "Bearer ")) {
+        var authHeader = request.getHeader(HEADER_NAME);
+        if(StringUtils.isEmpty(authHeader) || !StringUtils.startsWith(authHeader, BEARER_PREFIX)) {
             filterChain.doFilter(request, response);
             return;
         }
@@ -39,7 +40,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         var username = jwtService.extractUserName(jwt);
 
         if (StringUtils.isNotEmpty(username)) {
-            UserDetails userDetails = userService
+            User userDetails = userService
                     .loadUserByUsername(username);
 
             // Если токен валиден, то аутентифицируем пользователя

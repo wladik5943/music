@@ -11,5 +11,5 @@ public class ExceptionResponse {
     private HttpStatus status;
     private Integer statusInt;
     private String message;
-
+    private int code;
 }

@@ -12,8 +12,11 @@ import by.tms.music.song.model.SongResponse;
 import by.tms.music.user.model.UserCreateRequest;
 import by.tms.music.user.model.UserResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.actuate.endpoint.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +28,7 @@ import java.util.stream.Collectors;
 @Service
 public class UserServiceImpl implements UserServise {
 
+    private final PasswordEncoder standardPasswordEncoder;
     private final UserRepository userRepository;
     private final UserMapper userMapper;
     private final SongRepository songRepository;
@@ -33,6 +37,8 @@ public class UserServiceImpl implements UserServise {
     @Override
     public User register(UserCreateRequest createRequest) {
         var user = userMapper.toEntity(createRequest);
+        String encodingString=standardPasswordEncoder.encode(createRequest.getPassword());
+        user.setPassword(encodingString);
         return userRepository.save(user);
     }
 
@@ -44,8 +50,9 @@ public class UserServiceImpl implements UserServise {
 
     @Override
     @Transactional
-    public SongResponse addFavoriteSong(Long songId, Long userId) {
-        Optional<User> user = userRepository.findById(userId);
+    public SongResponse addFavoriteSong(Long songId) {
+        User userByToken = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Optional<User> user = userRepository.findById(userByToken.getId());
         Optional<Song> song = songRepository.findById(songId);
         user.ifPresent(user1 -> {user1.getFavoriteSongs().stream().
                 forEach(x ->
@@ -56,14 +63,18 @@ public class UserServiceImpl implements UserServise {
         userRepository.saveAndFlush(user.get());
         return songMapper.toResponse(song.get());
     }
+
     @Override
-    public Collection<SongResponse> getFavoriteSongs(Long userId) {
-        Optional<User> user = userRepository.findById(userId);
+    public Collection<SongResponse> getFavoriteSongs() {
+        User userByToken = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Optional<User> user = userRepository.findById(userByToken.getId());
         return user.get().getFavoriteSongs().stream().map(songMapper::toResponse).collect(Collectors.toList());
     }
+
     @Override
-    public void deleteFavoriteSong(Long songId, Long userId) {
-        Optional<User> user = userRepository.findById(userId);
+    public void deleteFavoriteSong(Long songId) {
+        User userByToken = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Optional<User> user = userRepository.findById(userByToken.getId());
         Optional<Song> song = songRepository.findById(songId);
         user.ifPresent(user1 -> {user1.getFavoriteSongs().remove(song.get());});
         userRepository.save(user.get());
@@ -89,8 +100,18 @@ public class UserServiceImpl implements UserServise {
 //    сделать exeption и метод должен ее выбрасывать
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public User loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByLogin(username);
+    }
+
+    @Override
+    public UserResponse editPassword(String password) {
+        User userByToken = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Optional<User> user = userRepository.findById(userByToken.getId());
+        String encodingString=standardPasswordEncoder.encode(password);
+        user.ifPresent(u -> { u.setPassword(encodingString);});
+        userRepository.saveAndFlush(user.get());
+        return userMapper.toResponse(user.get());
     }
 
 }

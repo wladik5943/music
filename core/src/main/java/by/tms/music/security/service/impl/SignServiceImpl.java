@@ -30,7 +30,7 @@ public class SignServiceImpl implements SignService {
 
 
     @Override
-    public JwtAuthenticationResponse SignIn(UserCreateRequest userCreateRequest) {
+    public JwtAuthenticationResponse signIn(UserCreateRequest userCreateRequest) {
         var user = userRepository.findByLogin(userCreateRequest.getLogin());
         var authToken =new UsernamePasswordAuthenticationToken(
                 userCreateRequest.getLogin(),
