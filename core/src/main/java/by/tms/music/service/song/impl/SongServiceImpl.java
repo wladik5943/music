@@ -16,6 +16,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -44,6 +45,11 @@ public class SongServiceImpl implements SongService {
     @Override
     public SongResponse getSongById(Long id){
         return songMapper.toResponse(songRepository.findById(id).orElse(null));
+    }
+
+    @Override
+    public Collection<Song> getSongsById(Collection<Long> ids) {
+        return songRepository.findAllById(ids);
     }
 
     public Collection<SongResponse> getSongsByAlbumId(Long albumId){

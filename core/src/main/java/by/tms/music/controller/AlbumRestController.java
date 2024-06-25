@@ -3,6 +3,7 @@ package by.tms.music.controller;
 import by.tms.music.album.contact.AlbumRestAPI;
 import by.tms.music.album.model.AlbumCreateRequest;
 import by.tms.music.album.model.AlbumResponse;
+import by.tms.music.album.model.AlbumUpdateRequest;
 import by.tms.music.exception.UniversalException;
 import by.tms.music.service.album.AlbumService;
 import lombok.RequiredArgsConstructor;
@@ -32,5 +33,10 @@ public class AlbumRestController implements AlbumRestAPI {
     @Override
     public void deleteAlbum(Long id) {
         albumService.deleteAlbum(id);
+    }
+
+    @Override
+    public AlbumResponse updateAlbum(AlbumUpdateRequest request) {
+        return albumService.updateAlbum(request);
     }
 }

@@ -2,6 +2,7 @@ package by.tms.music.album.contact;
 
 import by.tms.music.album.model.AlbumCreateRequest;
 import by.tms.music.album.model.AlbumResponse;
+import by.tms.music.album.model.AlbumUpdateRequest;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,4 +19,7 @@ public interface AlbumRestAPI {
 
     @DeleteMapping("delete/{id}")
     public void deleteAlbum(@PathVariable Long id);
+
+    @PatchMapping("update")
+    public AlbumResponse updateAlbum(@RequestBody AlbumUpdateRequest request);
 }

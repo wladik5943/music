@@ -42,6 +42,7 @@ public class JwtSecurityConfig {
                                 .requestMatchers(HttpMethod.POST, "/artist").hasAuthority("ADMIN")
                                 .requestMatchers(HttpMethod.GET, "/album/**").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/album/add").hasAuthority("ADMIN")
+                                .requestMatchers(HttpMethod.PATCH, "/album/**").hasAuthority("ADMIN")
                                 .requestMatchers(HttpMethod.DELETE, "/album").hasAuthority("ADMIN")
                                 .requestMatchers(HttpMethod.POST, "/song").hasAuthority("ADMIN")
                                 .requestMatchers(HttpMethod.GET, "/song/**").permitAll()
@@ -53,6 +54,7 @@ public class JwtSecurityConfig {
                                 .requestMatchers( "/subscription").authenticated()
                                 .requestMatchers("/song/favorite").authenticated()
                                 .requestMatchers("/session/login").permitAll()
+                                .requestMatchers("/swagger-ui/**", "/v3/api-docs/**","/swagger-ui.html").permitAll()
 //                        .requestMatchers("/**").permitAll()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, BasicAuthenticationFilter.class).exceptionHandling(ex -> {

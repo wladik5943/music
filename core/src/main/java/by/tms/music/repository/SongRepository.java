@@ -13,6 +13,6 @@ import org.springframework.stereotype.Repository;
 public interface SongRepository extends JpaRepository<Song, Long>, JpaSpecificationExecutor<Song> {
 
     @Query("select s from Song s where :artistId is null or s.artist.id =: artistId ")
-    public Page<Song> findByArtistId(Pageable pageable, @Param("artistId") Long artistId);
+    Page<Song> findByArtistId(Pageable pageable, @Param("artistId") Long artistId);
 
 }
