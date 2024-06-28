@@ -15,6 +15,7 @@ public class Handler {
     public ExceptionResponse universalException(final UniversalException e) {
         ExceptionResponse exceptionResponse = new ExceptionResponse();
         exceptionResponse.setMessage(e.getMessage());
+        exceptionResponse.setCode(e.getCode());
         exceptionResponse.setStatus(HttpStatus.BAD_REQUEST);
         return exceptionResponse;
     }

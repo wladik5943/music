@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface GenreRepository extends JpaRepository<Genre, Long> {
-    @Query("select case when count(u) > 0 then true else false from Genre u where u.name = :name")
+    @Query("select case when count(u) > 0 then true else false end from Genre u where u.name = :name")
     Boolean existsByName(@Param("name") String name);
 }

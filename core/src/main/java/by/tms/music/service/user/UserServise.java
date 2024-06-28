@@ -15,7 +15,6 @@ public interface UserServise {
     public SongResponse addFavoriteSong(Long songId);
     public Collection<SongResponse> getFavoriteSongs();
     public void deleteFavoriteSong(Long songId);
-    public UserResponse authorization(String login, String password);
     public UserResponse getUserById(Long userId);
     public UserDetails loadUserByUsername(String username);
     public UserResponse editPassword(String password);

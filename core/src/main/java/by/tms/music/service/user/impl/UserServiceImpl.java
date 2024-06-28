@@ -35,11 +35,16 @@ public class UserServiceImpl implements UserServise {
     private final SongMapper songMapper;
 
     @Override
+    @Transactional
     public User register(UserCreateRequest createRequest) {
         var user = userMapper.toEntity(createRequest);
         String encodingString=standardPasswordEncoder.encode(createRequest.getPassword());
         user.setPassword(encodingString);
-        return userRepository.save(user);
+        User byLogin = userRepository.findByLogin(createRequest.getLogin());
+        if (byLogin == null)
+            return userRepository.save(user);
+        else
+            throw new UniversalException("данный логин уже занят", 400);
     }
 
     @Override
@@ -72,6 +77,7 @@ public class UserServiceImpl implements UserServise {
     }
 
     @Override
+    @Transactional
     public void deleteFavoriteSong(Long songId) {
         User userByToken = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Optional<User> user = userRepository.findById(userByToken.getId());
@@ -81,21 +87,15 @@ public class UserServiceImpl implements UserServise {
         userRepository.flush();
     }
 
-    @Override
-    public UserResponse authorization(String login, String password) {
-        var user = userRepository.findByLogin(login);
-        if (user == null){
-            throw new UniversalException("Пользователь не найден");
-        }
-        if(user.getPassword().equals(password)){
-            return userMapper.toResponse(user);
-        }
-        throw new UniversalException("неверный пароль");
-    }
+
 
     @Override
     public UserResponse getUserById(Long userId) {
-        return userMapper.toResponse(userRepository.findById(userId).get());
+        Optional<User> byId = userRepository.findById(userId);
+        if (byId.isPresent())
+            return userMapper.toResponse(byId.get());
+        else
+            throw new UniversalException("user not found", 400);
     }
 //    сделать exeption и метод должен ее выбрасывать
 
