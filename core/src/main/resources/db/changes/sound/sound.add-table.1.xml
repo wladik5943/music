@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="
+  http://www.liquibase.org/xml/ns/dbchangelog
+  http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+
+    <changeSet author="vlad" id="sound.add-table.1">
+        <validCheckSum>ANY</validCheckSum>
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="songs"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="songs">
+            <column name="id" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="song_id_pkey"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="true" unique="false"/>
+            </column>
+            <column name="album_id" type="bigint">
+                <constraints nullable="false"/>
+                <constraints foreignKeyName="fk_song_album_id" references="album(id)"/>
+            </column>
+            <column name="artist_id" type="bigint">
+                <constraints nullable="false"/>
+                <constraints foreignKeyName="fk_song_artist_id" references="artist(id)"/>
+            </column>
+            <column name="genre_id" type="bigint">
+                <constraints nullable="false"/>
+                <constraints foreignKeyName="fk_song_genre_id" references="genre(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+
+
+
+
+    <changeSet author="vlad" id="user.1.user_sequence">
+        <createSequence incrementBy="1"
+                        minValue="1"
+                        sequenceName="user_seq"
+                        startValue="1"/>
+    </changeSet>
+
+</databaseChangeLog>

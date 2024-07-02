@@ -21,8 +21,8 @@ public class SubscriptionRestController implements SubscriptionRestAPI {
     }
 
     @Override
-    public SubscriptionResponse getSubscriptionById(@PathVariable Long id) {
-        SubscriptionResponse subscriptionResponse = subscriptionService.getSubcription(id);
+    public SubscriptionResponse getSubscriptionById() {
+        SubscriptionResponse subscriptionResponse = subscriptionService.getSubcription();
         if(subscriptionResponse == null)
             throw new UniversalException("подписка отсутствует");
         return subscriptionResponse;

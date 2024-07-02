@@ -12,6 +12,6 @@ public interface SubscriptionRestAPI {
     @PostMapping("/add")
     public SubscriptionResponse addSubscription(@RequestBody SubscriptionCreateRequest subscription);
 
-    @GetMapping("/subcription/{id}")
-    public SubscriptionResponse getSubscriptionById(@PathVariable Long id);
+    @GetMapping("/get")
+    public SubscriptionResponse getSubscriptionById();
 }

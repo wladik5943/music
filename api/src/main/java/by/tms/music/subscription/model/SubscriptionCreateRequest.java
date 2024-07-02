@@ -9,7 +9,6 @@ import java.time.LocalTime;
 @Data
 public class SubscriptionCreateRequest
 {
-    private Long userId;
     private LocalDate startDate;
     private LocalDate endDate;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
